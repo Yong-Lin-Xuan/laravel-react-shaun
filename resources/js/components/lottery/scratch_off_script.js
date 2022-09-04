@@ -188,30 +188,8 @@
                         if (event.cancelable) event.preventDefault();
                         break;
                     }
-
-                var imageDate = data.ctx.getImageData(
-                    0,
-                    0,
-                    $this.width(),
-                    $this.height()
-                );
-                var allPX = imageDate.width * imageDate.height;
-
-                var iNum = 0;
-
-                for (var i = 0; i < allPX; i++) {
-                    if (imageDate.data[i * 4 + 3] == 0) {
-                        iNum++;
-                    }
-                }
-                if (iNum >= allPX * 0.8) {
-                    $this.unbind("mousedown.eraser");
-                    $this.unbind("touchstart.eraser");
-                    $this.unbind("touchmove.eraser");
-                    $this.unbind("touchend.eraser");
-                    set(true);
-                }
             }
+            methods.finishPercent($this, data);
         },
 
         evaluatePoint: function (data, tx, ty) {
@@ -271,6 +249,7 @@
             $this.unbind("mousemove.eraser");
             $(document).unbind("mouseup.eraser");
             if (event.cancelable) event.preventDefault();
+            methods.finishPercent($this, data);
         },
 
         clear: function () {
@@ -314,6 +293,32 @@
                 while (n--) data.parts[n] = 1;
                 data.ratio = 0;
                 data.complete = false;
+            }
+        },
+
+        finishPercent: function ($this, data) {
+            var imageDate = data.ctx.getImageData(
+                0,
+                0,
+                $this.width(),
+                $this.height()
+            );
+            var allPX = imageDate.width * imageDate.height;
+
+            var iNum = 0;
+
+            for (var i = 0; i < allPX; i++) {
+                if (imageDate.data[i * 4 + 3] == 0) {
+                    iNum++;
+                }
+            }
+            console.log([iNum, allPX]);
+            if (iNum >= allPX * 0.8) {
+                $this.unbind("mousedown.eraser");
+                $this.unbind("touchstart.eraser");
+                $this.unbind("touchmove.eraser");
+                $this.unbind("touchend.eraser");
+                set(true);
             }
         },
     };

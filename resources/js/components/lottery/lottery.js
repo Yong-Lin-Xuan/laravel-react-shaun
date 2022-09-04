@@ -28,6 +28,7 @@ const styles = () => ({
         height: "100%",
         "& .main": {
             width: "100vw",
+            height: "200vw",
             minHeight: "100vh",
             position: "relative",
             display: "flex",

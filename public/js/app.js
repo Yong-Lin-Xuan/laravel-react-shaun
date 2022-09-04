@@ -78330,6 +78330,7 @@ var styles = function styles() {
       height: "100%",
       "& .main": {
         width: "100vw",
+        height: "200vw",
         minHeight: "100vh",
         position: "relative",
         display: "flex",
@@ -78592,25 +78593,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             break;
           }
         }
-
-        var imageDate = data.ctx.getImageData(0, 0, $this.width(), $this.height());
-        var allPX = imageDate.width * imageDate.height;
-        var iNum = 0;
-
-        for (var i = 0; i < allPX; i++) {
-          if (imageDate.data[i * 4 + 3] == 0) {
-            iNum++;
-          }
-        }
-
-        if (iNum >= allPX * 0.8) {
-          $this.unbind("mousedown.eraser");
-          $this.unbind("touchstart.eraser");
-          $this.unbind("touchmove.eraser");
-          $this.unbind("touchend.eraser");
-          set(true);
-        }
       }
+
+      methods.finishPercent($this, data);
     },
     evaluatePoint: function evaluatePoint(data, tx, ty) {
       var p = Math.floor(tx / data.size) + Math.floor(ty / data.size) * data.colParts;
@@ -78665,6 +78650,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       $this.unbind("mousemove.eraser");
       $(document).unbind("mouseup.eraser");
       if (event.cancelable) event.preventDefault();
+      methods.finishPercent($this, data);
     },
     clear: function clear() {
       console.log("clear");
@@ -78710,6 +78696,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
         data.ratio = 0;
         data.complete = false;
+      }
+    },
+    finishPercent: function finishPercent($this, data) {
+      var imageDate = data.ctx.getImageData(0, 0, $this.width(), $this.height());
+      var allPX = imageDate.width * imageDate.height;
+      var iNum = 0;
+
+      for (var i = 0; i < allPX; i++) {
+        if (imageDate.data[i * 4 + 3] == 0) {
+          iNum++;
+        }
+      }
+
+      console.log([iNum, allPX]);
+
+      if (iNum >= allPX * 0.8) {
+        $this.unbind("mousedown.eraser");
+        $this.unbind("touchstart.eraser");
+        $this.unbind("touchmove.eraser");
+        $this.unbind("touchend.eraser");
+        set(true);
       }
     }
   };
