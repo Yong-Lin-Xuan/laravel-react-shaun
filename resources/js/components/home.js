@@ -11,6 +11,7 @@ const styles = () => ({
             minHeight: "100vh",
             position: "relative",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             "& #robot": {
@@ -35,6 +36,9 @@ function Home(props) {
             <div className="main">
                 <li>
                     <Link to="/lottery">刮刮樂</Link>
+                </li>
+                <li>
+                    <Link to="/carousel">幻燈片</Link>
                 </li>
             </div>
         </div>

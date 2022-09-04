@@ -312,7 +312,7 @@
                     iNum++;
                 }
             }
-            console.log([iNum, allPX]);
+            console.log([iNum / allPX]);
             if (iNum >= allPX * 0.8) {
                 $this.unbind("mousedown.eraser");
                 $this.unbind("touchstart.eraser");
