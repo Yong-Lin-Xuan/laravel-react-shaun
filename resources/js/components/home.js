@@ -40,6 +40,9 @@ function Home(props) {
                 <li>
                     <Link to="/carousel">幻燈片</Link>
                 </li>
+                <li>
+                    <Link to="/gashapon">轉蛋機</Link>
+                </li>
             </div>
         </div>
     );

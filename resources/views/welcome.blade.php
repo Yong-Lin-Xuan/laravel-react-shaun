@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    
         <script>
             window.assetUrl = function(path) {
                 return '{{ $assetUrl }}' + path;
@@ -20,6 +21,7 @@
         <div id="main"></div>
         <div id="app"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.js"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

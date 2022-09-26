@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/styles";
+
+import "./act.js"
+import "./animation.css"
 
 const styles = (theme) => ({
     root: {
@@ -8,17 +11,28 @@ const styles = (theme) => ({
         width: "100vw",
         height: "100%",
         "& .main": {
-            margin: 0,
-            padding: 0,
-            width: "100vw",
-            height: "200vw",
-            minHeight: "100vh",
             position: "relative",
-            "@media (min-width: 300px)": {
-                "& .carousel-control-prev, & .carousel-control-next": {
-                    width: "8vw",
-                    height: "12vw",
-                    margin: "100vw 7vw 0 9vw",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            "& .content": {
+                position: "absolute",
+                "& .egg":{
+                    width: "100vw",
+                    height: "20vw",
+                    margin:"10vw 0",
+                    background: `top / contain url(${window.assetUrl(
+                        `/images/gashapon/egg.png`
+                    )}) no-repeat`,
+                },
+                "& .btn":{
+                    width: "100vw",
+                    height: "10vw",
+                    background: `top / contain url(${window.assetUrl(
+                        `/images/gashapon/cta.png`
+                    )}) no-repeat`,
                 },
             },
         },
@@ -26,13 +40,20 @@ const styles = (theme) => ({
 });
 
 function gashapon(props) {
+    const [act, setAct] = useState(false);
     const { classes } = props;
+
+    useEffect(()=>{
+        $("#redux").eraser({ clock:$('#clock'), btn:$('#btn')});
+    },[])
 
     return (
         <div className={classes.root}>
-            <div className="main">
-                
+            <div className="con">
+                <img src="https://nnemp-product-1254101407.cos.ap-shanghai.myqcloud.com/activities/con-bg.png" alt=""/>
+                <div id="clock"></div>
             </div>
+            <button id='btn'>啟動</button>
         </div>
     );
 }
